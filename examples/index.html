@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Wavery basic example</title>
+    <style>
+      html,
+      body {
+        margin: 0 0;
+        padding: 0 0;
+        text-align: center;
+        font-size: 10;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="svg"></div>
+    <script src="../dist/wavery.min.js"></script>
+    <script>
+      var wavery = new Wavery(
+        window.innerWidth - 20,
+        window.innerHeight - 20,
+        100,
+        10,
+        1
+      );
+      var svg = wavery.generate();
+      var element = document.getElementById("svg");
+      element.appendChild(svg);
+    </script>
+  </body>
+</html>
