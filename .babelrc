@@ -1,10 +1,16 @@
 {
   "presets": [
+    "@babel/typescript",
     [
       "@babel/preset-env",
       {
-        "debug": true
+        "debug": true,
+        "targets": "> 0.25%, not dead"
       }
     ]
+  ],
+  "plugins": [
+    "@babel/proposal-class-properties",
+    "@babel/proposal-object-rest-spread"
   ]
 }

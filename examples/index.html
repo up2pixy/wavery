@@ -20,14 +20,8 @@
     <div id="svg"></div>
     <script src="../dist/wavery.min.js"></script>
     <script>
-      var wavery = new Wavery(
-        window.innerWidth - 20,
-        window.innerHeight - 20,
-        100,
-        10,
-        1
-      );
-      var svg = wavery.generate();
+      var wavery = new Wavery();
+      var svg = wavery.generateSvg();
       var element = document.getElementById("svg");
       element.appendChild(svg);
     </script>
