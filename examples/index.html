@@ -20,7 +20,29 @@
     <div id="svg"></div>
     <script src="../dist/wavery.min.js"></script>
     <script>
-      var wavery = new Wavery();
+      var wavery = new Wavery({
+        width: 800,
+        height: 600,
+        segmentCount: 21,
+        layerCount: 10,
+        variance: 0.75,
+        strokeWidth: 1,
+        strokeColor: "black",
+        gradientColors: [
+          {
+            colorValue: "yellow",
+            position: 0
+          },
+          {
+            colorValue: "red",
+            position: 0.5
+          },
+          {
+            colorValue: "navy",
+            position: 1
+          }
+        ]
+      });
       var svg = wavery.generateSvg();
       var element = document.getElementById("svg");
       element.appendChild(svg);
