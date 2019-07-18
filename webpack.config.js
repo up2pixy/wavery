@@ -1,10 +1,10 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 var path = require("path");
-var webpack = require("webpack");
 
 module.exports = {
-  target: "web",
-  entry: "./lib/wavery.js",
   mode: "production",
+  entry: "./lib/wavery.ts",
+  target: "web",
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: "wavery.min.js",
@@ -15,6 +15,11 @@ module.exports = {
     rules: [
       {
         test: /\.js$/,
+        use: ["source-map-loader"],
+        enforce: "pre"
+      },
+      {
+        test: /\.ts$/,
         enforce: "pre",
         loader: "eslint-loader",
         exclude: /node_modules/,
@@ -24,7 +29,7 @@ module.exports = {
         }
       },
       {
-        test: /\.js$/,
+        test: /\.ts$/,
         exclude: /(node_modules|bower_components)/,
         use: {
           loader: "babel-loader",
@@ -37,6 +42,5 @@ module.exports = {
   },
   stats: {
     colors: true
-  },
-  devtool: "source-map"
+  }
 };
