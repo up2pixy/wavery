@@ -1,5 +1,5 @@
-import { computeControlPoints } from "./bezier-spline.js";
-import { Point, WaveryOption } from "types.ts";
+import { computeControlPoints } from "./bezier-spline";
+import { Point, WaveryOption } from "./types";
 import chroma from "chroma-js";
 
 const svgns = "http://www.w3.org/2000/svg";

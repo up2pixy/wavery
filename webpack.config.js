@@ -19,7 +19,7 @@ module.exports = {
         enforce: "pre"
       },
       {
-        test: /\.ts$/,
+        test: /\.tsx?$/,
         enforce: "pre",
         loader: "eslint-loader",
         exclude: /node_modules/,
@@ -29,7 +29,7 @@ module.exports = {
         }
       },
       {
-        test: /\.ts$/,
+        test: /\.tsx?$/,
         exclude: /(node_modules|bower_components)/,
         use: {
           loader: "babel-loader",
@@ -42,5 +42,9 @@ module.exports = {
   },
   stats: {
     colors: true
+  },
+  devtool: "source-map",
+  devServer: {
+    contentBase: path.resolve(__dirname, "dist")
   }
 };
