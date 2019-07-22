@@ -1,11 +1,16 @@
 {
   "name": "wavery",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Wavery is a javascript library for generating colorful SVG waves.",
   "main": "lib/wavery.ts",
   "dependencies": {
     "chroma-js": "^2.0.4"
   },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/up2pixy/wavery.git"
+  },
+  "homepage": "https://wavery.azurewebsites.net/",
   "author": "Michael Chen (MichaelFromSeattle@outlook.com)",
   "license": "MIT",
   "scripts": {
