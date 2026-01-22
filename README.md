@@ -260,7 +260,8 @@ npm start
 ```
 
 ## Showcase
-![image](https://github.com/user-attachments/assets/607850c0-d035-48c0-a6f2-f829c7c2c832)
+<img width="1345" height="768" alt="image" src="https://github.com/user-attachments/assets/327f9be1-977d-4f40-8f0b-b84a22c55f84" />
+
 
 ## Acknowledgements
 This tool is heavily inspired by [trianglify](https://github.com/qrohlf/trianglify) and the function from [bezier-splines](http://www.particleincell.com/2012/bezier-splines).
