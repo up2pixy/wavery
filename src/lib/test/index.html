@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Wavery basic example</title>
+  </head>
+
+  <body>
+    <script src="../dist/wavery.js"></script>
+    <script>
+      var svg = Wavery.createWavery({
+        width: 800,
+        height: 600,
+        segmentCount: 30,
+        layerCount: 10,
+        variance: 0.75,
+        strokeWidth: 0,
+        strokeColor: "none",
+        gradientColors: [
+          {
+            colorValue: "yellow",
+            position: 0
+          },
+          {
+            colorValue: "green",
+            position: 0.5
+          },
+          {
+            colorValue: "navy",
+            position: 1
+          }
+        ]
+      });
+      document.body.appendChild(svg);
+      
+      var base64Url = Wavery.createWaveryDataURL({
+        width: 800,
+        height: 600,
+        segmentCount: 20,
+        layerCount: 15,
+        variance: 0.85,
+        strokeWidth: 1,
+        strokeColor: "white",
+        gradientColors: [
+          {
+            colorValue: "pink",
+            position: 0
+          },
+          {
+            colorValue: "red",
+            position: 0.5
+          },
+          {
+            colorValue: "yellow",
+            position: 1
+          }
+        ]
+      });
+      var img = document.createElement("img");
+      img.src = base64Url;
+      document.body.appendChild(img);
+    </script>
+  </body>
+</html>

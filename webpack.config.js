@@ -1,50 +1,39 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-var path = require("path");
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  mode: "production",
-  entry: "./lib/wavery.ts",
-  target: "web",
+  entry: './src/app/index.tsx',
   output: {
-    path: path.resolve(__dirname, "dist"),
-    filename: "wavery.min.js",
-    library: "Wavery",
-    libraryExport: "default"
+    path: path.resolve(__dirname, 'dist'),
+    filename: 'waveryapp.js',
+    clean: true
+  },
+  resolve: {
+    extensions: ['.ts', '.tsx', '.js', '.jsx']
   },
   module: {
     rules: [
       {
-        test: /\.js$/,
-        use: ["source-map-loader"],
-        enforce: "pre"
-      },
-      {
         test: /\.tsx?$/,
-        enforce: "pre",
-        loader: "eslint-loader",
-        exclude: /node_modules/,
-        options: {
-          emitWarning: true,
-          configFile: "./.eslintrc.json"
-        }
-      },
-      {
-        test: /\.tsx?$/,
-        exclude: /(node_modules|bower_components)/,
-        use: {
-          loader: "babel-loader",
-          options: {
-            presets: ["@babel/preset-env"]
-          }
-        }
+        use: 'ts-loader',
+        exclude: /node_modules/
       }
     ]
   },
-  stats: {
-    colors: true
-  },
-  devtool: "source-map",
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: './src/app/index.html',
+      title: 'Wavery Generator'
+    })
+  ],
   devServer: {
-    contentBase: path.resolve(__dirname, "dist")
-  }
+    static: {
+      directory: path.join(__dirname, 'dist'),
+    },
+    compress: true,
+    port: 3000,
+    hot: true,
+    open: true
+  },
+  devtool: 'source-map'
 };

@@ -2,7 +2,7 @@ export interface Point {
   x: number;
   y: number;
 }
-export interface WaveryOption {
+export interface WaveryOptions {
   width: number;
   height: number;
   segmentCount: number;

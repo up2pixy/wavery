@@ -1,0 +1,7 @@
+src/
+test/
+node_modules/
+*.ts
+!*.d.ts
+tsconfig.json
+webpack.config.js
