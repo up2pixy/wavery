@@ -12,18 +12,18 @@ export const defaultOptions: WaveryOptions = {
   layerCount: 10,
   variance: 0.75,
   strokeWidth: 0,
-  strokeColor: "none",
+  strokeColor: "#000000",
   gradientColors: [
     {
-      colorValue: "yellow",
+      colorValue: "#ffff00",
       position: 0
     },
     {
-      colorValue: "red",
+      colorValue: "#ff0000",
       position: 0.5
     },
     {
-      colorValue: "navy",
+      colorValue: "#000080",
       position: 1
     }
   ]
