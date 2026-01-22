@@ -264,4 +264,7 @@ npm start
 
 
 ## Acknowledgements
-This tool is heavily inspired by [trianglify](https://github.com/qrohlf/trianglify) and the function from [bezier-splines](http://www.particleincell.com/2012/bezier-splines).
+This project is inspired by and built upon the work of others:
+
+- **[Trianglify](https://github.com/qrohlf/trianglify)** - A library for generating colorful triangle meshes that served as inspiration for this project's approach to generative backgrounds.
+- **[Bezier Splines](http://www.particleincell.com/2012/bezier-splines)** - The algorithm for computing smooth bezier curve control points used to create the wave paths.
