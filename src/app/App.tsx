@@ -1,8 +1,7 @@
 import WavesIcon from '@mui/icons-material/Waves';
 import { AppBar, Box, Container, Paper, Toolbar, Typography } from '@mui/material';
 import React, { useCallback, useState } from 'react';
-import { WaveryOptions } from '../lib/src/types';
-import { defaultOptions } from '../lib/src/wavery';
+import { WaveryOptions, defaultOptions } from '../lib/src/wavery';
 import ControlPanel from './components/ControlPanel';
 import WaveryCanvas from './components/WaveryCanvas';
 

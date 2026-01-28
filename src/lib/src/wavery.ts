@@ -1,9 +1,28 @@
 import chroma from "chroma-js";
 // @ts-ignore
 import { computeControlPoints } from "./bezier-spline";
-import { Point, WaveryOptions } from "./types";
 
 const svgns = "http://www.w3.org/2000/svg";
+
+export interface Point {
+  x: number;
+  y: number;
+}
+export interface WaveryOptions {
+  width: number;
+  height: number;
+  segmentCount: number;
+  layerCount: number;
+  variance: number;
+  strokeWidth: number;
+  strokeColor: string;
+  gradientColors: WaveryColorInfo[];
+}
+
+export interface WaveryColorInfo {
+  colorValue: string;
+  position: number;
+}
 
 export const defaultOptions: WaveryOptions = {
   width: 800,

@@ -1,8 +1,7 @@
 import DownloadIcon from '@mui/icons-material/Download';
 import { Box, IconButton, Tooltip } from '@mui/material';
 import React, { useEffect, useMemo, useRef } from 'react';
-import { WaveryOptions } from '../../lib/src/types';
-import { createWavery, createWaveryDataURL } from '../../lib/src/wavery';
+import { createWavery, createWaveryDataURL, WaveryOptions } from '../../lib/src/wavery';
 
 interface WaveryCanvasProps {
   options: WaveryOptions;

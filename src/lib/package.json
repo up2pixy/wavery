@@ -1,11 +1,12 @@
 {
   "name": "wavery",
-  "version": "1.0.0",
+  "version": "1.0.5",
   "description": "Generate smooth wavy SVG backgrounds",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "lib/wavery.js",
+  "types": "lib/wavery.d.ts",
   "files": [
-    "dist"
+    "lib",
+    "LICENSE"
   ],
   "scripts": {
     "build": "webpack --mode production",
@@ -21,9 +22,11 @@
   ],
   "author": "Michael Chen",
   "license": "MIT",
+  "dependencies": {
+    "chroma-js": "^3.2.0"
+  },
   "devDependencies": {
     "@types/chroma-js": "^3.1.2",
-    "chroma-js": "^3.2.0",
     "ts-loader": "^9.5.1",
     "typescript": "^5.3.3",
     "webpack": "^5.89.0",

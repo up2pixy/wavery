@@ -18,7 +18,7 @@ import {
   Typography,
 } from '@mui/material';
 import React, { useState } from 'react';
-import { WaveryOptions } from '../../lib/src/types';
+import { WaveryOptions } from '../../lib/src/wavery';
 
 interface ControlPanelProps {
   options: WaveryOptions;
