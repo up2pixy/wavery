@@ -36,6 +36,7 @@ module.exports = [
         type: "umd",
         name: "Wavery",
       },
+      globalObject: "this",
       clean: true,
     },
     resolve: {

@@ -1,0 +1,33 @@
+{
+  "name": "wavery-mcp-server",
+  "version": "1.0.0",
+  "description": "MCP server for generating wavy SVG/PNG backgrounds using Wavery",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "bin": {
+    "wavery-mcp-server": "dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js"
+  },
+  "keywords": [
+    "mcp",
+    "wavery",
+    "svg",
+    "wave",
+    "background"
+  ],
+  "author": "Michael Chen",
+  "license": "MIT",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.12.1",
+    "sharp": "^0.33.2",
+    "wavery": "file:../lib",
+    "zod": "^3.24.2"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.4",
+    "typescript": "^5.3.3"
+  }
+}
