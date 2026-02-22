@@ -58,8 +58,8 @@ npm install wavery
 <div id="svg"></div>
 <script src="node_modules/wavery/dist/wavery.js"></script>
 <script>
-  // Create SVG element
-  var svg = Wavery.createWavery({
+  // Create SVG string
+  var svgString = Wavery.createWavery({
     width: 800,
     height: 600,
     segmentCount: 30,
@@ -73,9 +73,9 @@ npm install wavery
       { colorValue: "navy", position: 1 }
     ]
   });
-  document.getElementById("svg").appendChild(svg);
+  document.getElementById("svg").innerHTML = svgString;
 
-  // Or create a base64 data URL
+  // Or create a data URL
   var dataUrl = Wavery.createWaveryDataURL({
     width: 800,
     height: 600,
@@ -98,8 +98,8 @@ npm install wavery
 ```javascript
 import { createWavery, createWaveryDataURL } from 'wavery';
 
-// Create SVG element
-const svg = createWavery({
+// Create SVG string
+const svgString = createWavery({
   width: 800,
   height: 600,
   segmentCount: 30,
@@ -111,9 +111,9 @@ const svg = createWavery({
     { colorValue: "navy", position: 1 }
   ]
 });
-document.body.appendChild(svg);
+document.body.innerHTML = svgString;
 
-// Or create a base64 data URL for use in CSS or img tags
+// Or create a data URL for use in CSS or img tags
 const dataUrl = createWaveryDataURL({
   width: 800,
   height: 600,
@@ -131,7 +131,7 @@ document.body.style.backgroundImage = `url(${dataUrl})`;
 
 ### `createWavery(options?)`
 
-Creates and returns an SVG element with wavy background.
+Creates and returns an SVG string with wavy background.
 
 #### Parameters
 
@@ -148,13 +148,13 @@ Creates and returns an SVG element with wavy background.
 
 #### Returns
 
-`SVGElement` - The generated SVG element
+`string` - The generated SVG markup string
 
 ---
 
 ### `createWaveryDataURL(options?)`
 
-Creates a wavy SVG and returns it as a base64-encoded data URL. Useful for CSS backgrounds or `<img>` elements.
+Creates a wavy SVG and returns it as a URI-encoded data URL. Useful for CSS backgrounds or `<img>` elements.
 
 #### Parameters
 
@@ -162,7 +162,7 @@ Same options as `createWavery()`.
 
 #### Returns
 
-`string` - A base64 data URL (e.g., `data:image/svg+xml;base64,...`)
+`string` - A data URL (e.g., `data:image/svg+xml;charset=utf-8,...`)
 
 ---
 
@@ -190,7 +190,7 @@ interface GradientColor {
 ### Sunset Theme
 
 ```javascript
-const svg = createWavery({
+const svgString = createWavery({
   width: 1200,
   height: 400,
   layerCount: 8,
@@ -205,7 +205,7 @@ const svg = createWavery({
 ### Ocean Theme
 
 ```javascript
-const svg = createWavery({
+const svgString = createWavery({
   width: 1200,
   height: 400,
   layerCount: 12,
@@ -258,6 +258,38 @@ npm run build
 ```bash
 npm start
 ```
+
+## Publishing
+
+### Library (src/lib)
+
+The wavery library is published to npm. To publish a new version:
+
+```bash
+cd src/lib
+npm version patch  # or minor, major
+npm publish
+```
+
+The library package is configured to only include the `lib` directory (compiled output) and `LICENSE` file. Source files, tests, and build configuration are excluded via the `files` field in `package.json`.
+
+### App (Root)
+
+The wavery-app package uses `.npmignore` to control what gets published:
+
+**Excluded from npm package:**
+- Source files (`src/`)
+- Test files (`test/`)
+- TypeScript source files (`*.ts`)
+- Build configuration (`tsconfig.json`, `webpack.config.js`)
+- Dependencies (`node_modules/`)
+
+**Included in npm package:**
+- Compiled output (`dist/`)
+- TypeScript declaration files (`*.d.ts`)
+- `package.json`, `LICENSE`, and `README.md`
+
+The app automatically builds before publishing via the `prepublishOnly` script.
 
 ## Showcase
 <img width="1345" height="768" alt="image" src="https://github.com/user-attachments/assets/327f9be1-977d-4f40-8f0b-b84a22c55f84" />

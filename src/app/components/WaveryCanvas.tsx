@@ -11,19 +11,16 @@ interface WaveryCanvasProps {
 const WaveryCanvas: React.FC<WaveryCanvasProps> = ({ options, refreshKey }) => {
   const containerRef = useRef<HTMLDivElement>(null);
 
-  const svgElement = useMemo(() => {
+  const svgMarkup = useMemo(() => {
     return createWavery(options);
   }, [options, refreshKey]);
 
   useEffect(() => {
     const container = containerRef.current;
-    if (container && svgElement) {
-      // Clear previous content
-      container.innerHTML = '';
-      // Append the new SVG
-      container.appendChild(svgElement);
+    if (container && svgMarkup) {
+      container.innerHTML = svgMarkup;
     }
-  }, [svgElement]);
+  }, [svgMarkup]);
 
   const handleDownloadSVG = () => {
     const dataURL = createWaveryDataURL(options);

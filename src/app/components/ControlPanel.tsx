@@ -19,6 +19,7 @@ import {
 } from '@mui/material';
 import React, { useState } from 'react';
 import { WaveryOptions } from '../../lib/src/wavery';
+import { colorPresets } from '../presets';
 
 interface ControlPanelProps {
   options: WaveryOptions;
@@ -74,6 +75,13 @@ const ControlPanel: React.FC<ControlPanelProps> = ({
       color.position = idx / (newColors.length - 1);
     });
     onOptionsChange({ gradientColors: newColors });
+  };
+
+  const applyPreset = (presetIndex: number) => {
+    const preset = colorPresets[presetIndex];
+    if (preset) {
+      onOptionsChange({ gradientColors: [...preset.colors] });
+    }
   };
 
   return (
@@ -289,6 +297,67 @@ const ControlPanel: React.FC<ControlPanelProps> = ({
             >
               Add Color
             </Button>
+          </Stack>
+        </AccordionDetails>
+      </Accordion>
+
+      {/* Color Presets */}
+      <Accordion
+        expanded={expanded === 'presets'}
+        onChange={handleAccordionChange('presets')}
+      >
+        <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+          <Typography>Color Presets</Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <Stack spacing={1.5}>
+            {colorPresets.map((preset, index) => (
+              <Box
+                key={index}
+                onClick={() => applyPreset(index)}
+                sx={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: 1.5,
+                  p: 1.5,
+                  bgcolor: 'grey.50',
+                  borderRadius: 1,
+                  cursor: 'pointer',
+                  transition: 'all 0.2s',
+                  border: '1px solid',
+                  borderColor: 'grey.300',
+                  '&:hover': {
+                    bgcolor: 'grey.200',
+                    borderColor: 'primary.main',
+                    boxShadow: 1,
+                  },
+                }}
+              >
+                <Box
+                  sx={{
+                    display: 'flex',
+                    gap: 0.5,
+                    minWidth: 80,
+                  }}
+                >
+                  {preset.colors.map((color, colorIndex) => (
+                    <Box
+                      key={colorIndex}
+                      sx={{
+                        width: 24,
+                        height: 24,
+                        bgcolor: color.colorValue,
+                        borderRadius: 0.5,
+                        border: '1px solid rgba(0,0,0,0.1)',
+                      }}
+                    />
+                  ))}
+                </Box>
+                <Typography variant="body2" sx={{ flex: 1, fontWeight: 500 }}>
+                  {preset.name}
+                </Typography>
+              </Box>
+            ))}
           </Stack>
         </AccordionDetails>
       </Accordion>

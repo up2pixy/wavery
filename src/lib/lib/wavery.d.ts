@@ -17,5 +17,5 @@ export interface WaveryColorInfo {
     position: number;
 }
 export declare const defaultOptions: WaveryOptions;
-export declare const createWavery: (options: WaveryOptions) => SVGElement;
+export declare const createWavery: (options: WaveryOptions) => string;
 export declare const createWaveryDataURL: (options: WaveryOptions) => string;

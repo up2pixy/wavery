@@ -82,7 +82,7 @@ const generateClosedPath = (
   filleColor: string,
   strokeColor: string,
   strokeWidth: number
-): SVGElement => {
+): string => {
   const xPoints = curvePoints.map((p: Point): number => p.x);
   const yPoints = curvePoints.map((p: Point): number => p.y);
   const xControlPoints = computeControlPoints(xPoints);
@@ -106,16 +106,10 @@ const generateClosedPath = (
     `${rightCornerPoint.x},${rightCornerPoint.y} ` +
     `${rightCornerPoint.x},${rightCornerPoint.y} Z`;
 
-  const svgPath = document.createElementNS(svgns, "path");
-  svgPath.setAttributeNS(null, "fill", filleColor);
-  svgPath.setAttributeNS(null, "stroke", strokeColor);
-  svgPath.setAttributeNS(null, "stroke-width", strokeWidth.toString());
-  svgPath.setAttributeNS(null, "d", path);
-
-  return svgPath;
+  return `<path fill="${filleColor}" stroke="${strokeColor}" stroke-width="${strokeWidth}" d="${path}"/>`;
 }
 
-export const createWavery = (options: WaveryOptions): SVGElement => {
+export const createWavery = (options: WaveryOptions): string => {
   const optionsWithDefaults = { ...defaultOptions, ...options };
   const points = generatePoints(
     optionsWithDefaults.width,
@@ -125,28 +119,20 @@ export const createWavery = (options: WaveryOptions): SVGElement => {
     optionsWithDefaults.variance
   );
 
-  const svg = document.createElementNS(svgns, "svg");
-  svg.setAttribute("width", optionsWithDefaults.width.toString());
-  svg.setAttribute("height", optionsWithDefaults.height.toString());
-  svg.setAttribute("xmlns", svgns);
   const colorScale = chroma
     .scale(optionsWithDefaults.gradientColors.map(c => c.colorValue))
     .domain(optionsWithDefaults.gradientColors.map(c => c.position * points.length));
 
+  const children: string[] = [];
+
   // Fill the background first
-  const rect = document.createElementNS(svgns, "rect");
-  rect.setAttributeNS(null, "x", "0");
-  rect.setAttributeNS(null, "y", "0");
-  rect.setAttributeNS(null, "height", optionsWithDefaults.height.toString());
-  rect.setAttributeNS(null, "width", optionsWithDefaults.width.toString());
-  rect.setAttributeNS(null, "fill", colorScale(0).hex());
-  rect.setAttributeNS(null, "stroke", optionsWithDefaults.strokeColor);
-  rect.setAttributeNS(null, "stroke-width", optionsWithDefaults.strokeWidth.toString());
-  svg.appendChild(rect);
+  children.push(
+    `<rect x="0" y="0" height="${optionsWithDefaults.height}" width="${optionsWithDefaults.width}" fill="${colorScale(0).hex()}" stroke="${optionsWithDefaults.strokeColor}" stroke-width="${optionsWithDefaults.strokeWidth}"/>`
+  );
 
   // Append each layer of wave
   for (let i = 0; i < points.length; i++) {
-    svg.appendChild(
+    children.push(
       generateClosedPath(
         points[i],
         { x: 0, y: optionsWithDefaults.height },
@@ -157,13 +143,12 @@ export const createWavery = (options: WaveryOptions): SVGElement => {
       )
     );
   }
-  return svg;
+
+  return `<svg width="${optionsWithDefaults.width}" height="${optionsWithDefaults.height}" xmlns="${svgns}">${children.join('')}</svg>`;
 }
 
 export const createWaveryDataURL = (options: WaveryOptions): string => {
-  const svgElement = createWavery(options);
-  const serializer = new XMLSerializer();
-  const svgString = serializer.serializeToString(svgElement);
+  const svgString = createWavery(options);
   const encodedData = encodeURIComponent(svgString);
   const dataURL = `data:image/svg+xml;charset=utf-8,${encodedData}`;
   return dataURL;
