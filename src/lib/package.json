@@ -1,12 +1,13 @@
 {
   "name": "wavery",
-  "version": "1.0.6",
+  "version": "1.0.8",
   "description": "Generate smooth wavy SVG backgrounds",
   "main": "lib/wavery.js",
   "types": "lib/wavery.d.ts",
   "files": [
     "lib",
-    "LICENSE"
+    "LICENSE",
+    "README.md"
   ],
   "scripts": {
     "build": "webpack --mode production",
