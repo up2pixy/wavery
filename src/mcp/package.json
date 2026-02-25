@@ -2,14 +2,10 @@
   "name": "wavery-mcp-server",
   "version": "1.0.0",
   "description": "MCP server for generating wavy SVG/PNG backgrounds using Wavery",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
-  "bin": {
-    "wavery-mcp-server": "dist/index.js"
-  },
   "scripts": {
     "build": "tsc",
-    "start": "node dist/index.js"
+    "start:stdio": "node dist/local.js",
+    "start:http": "node dist/server.js"
   },
   "keywords": [
     "mcp",

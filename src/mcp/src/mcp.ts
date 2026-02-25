@@ -17,14 +17,14 @@ const MAX_HEIGHT = 1024;
 /**
  * Build a WaveryOptions object from tool input parameters.
  */
-function buildWaveryOptions(params: {
+const buildWaveryOptions = (params: {
   colors?: string[];
   width?: number;
   height?: number;
   layerCount?: number;
   segmentCount?: number;
   variance?: number;
-}): WaveryOptions {
+}): WaveryOptions => {
   const width = Math.min(params.width ?? defaultOptions.width, MAX_WIDTH);
   const height = Math.min(params.height ?? defaultOptions.height, MAX_HEIGHT);
   const layerCount = params.layerCount ?? defaultOptions.layerCount;
@@ -94,60 +94,57 @@ const sharedParams = {
     .describe("How much each point can deviate from its grid position, 0–1 (default: 0.75)"),
 };
 
-// ── Server setup ──────────────────────────────────────────────────────────────
+export const getMcpServer = () => {
+  
+  // ── Server setup ──────────────────────────────────────────────────────────────
 
-const server = new McpServer({
-  name: "wavery-mcp-server",
-  version: "1.0.0",
-});
+  const server = new McpServer({
+    name: "wavery-mcp-server",
+    version: "1.0.0",
+  });
 
-// ── Tool: generate_wavery_svg ─────────────────────────────────────────────────
+  // ── Tool: generate_wavery_svg ─────────────────────────────────────────────────
 
-server.tool(
-  "generate_wavery_svg",
-  "Generate a wavy background and return it as an SVG markup string",
-  sharedParams,
-  async (params) => {
-    const options = buildWaveryOptions(params);
-    const svg = createWavery(options);
-    return {
-      content: [{ type: "text", text: svg }],
-    };
-  }
-);
+  server.registerTool(
+    "generate_wavery_svg",
+    {
+      description: "Generate a wavy background and return it as an SVG markup string",
+      inputSchema: sharedParams,
+    },
+    async (params) => {
+      const options = buildWaveryOptions(params);
+      const svg = createWavery(options);
+      return {
+        content: [{ type: "text", text: svg }],
+      };
+    }
+  );
 
-// ── Tool: generate_wavery_png ─────────────────────────────────────────────────
+  // ── Tool: generate_wavery_png ─────────────────────────────────────────────────
 
-server.tool(
-  "generate_wavery_png",
-  "Generate a wavy background and return it as a base64-encoded PNG image",
-  sharedParams,
-  async (params) => {
-    const options = buildWaveryOptions(params);
-    const svg = createWavery(options);
-    const pngBuffer = await sharp(Buffer.from(svg)).png().toBuffer();
-    const base64 = pngBuffer.toString("base64");
-    return {
-      content: [
-        {
-          type: "image",
-          data: base64,
-          mimeType: "image/png",
-        },
-      ],
-    };
-  }
-);
+  server.registerTool(
+    "generate_wavery_png",
+    {
+      description: "Generate a wavy background and return it as a base64-encoded PNG image",
+      inputSchema: sharedParams,
+    },
+    async (params) => {
+      const options = buildWaveryOptions(params);
+      const svg = createWavery(options);
+      const pngBuffer = await sharp(Buffer.from(svg)).png().toBuffer();
+      const base64 = pngBuffer.toString("base64");
+      return {
+        content: [
+          {
+            type: "image",
+            data: base64,
+            mimeType: "image/png",
+          },
+        ],
+      };
+    }
+  );
 
-// ── Start ─────────────────────────────────────────────────────────────────────
+  return server;
+};
 
-async function main() {
-  const transport = new StdioServerTransport();
-  await server.connect(transport);
-  console.error("Wavery MCP server running on stdio");
-}
-
-main().catch((error) => {
-  console.error("Fatal error:", error);
-  process.exit(1);
-});
