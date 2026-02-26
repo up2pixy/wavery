@@ -3,5 +3,6 @@
     "azureFunctions.projectLanguage": "TypeScript",
     "azureFunctions.projectRuntime": "~4",
     "debug.internalConsoleOptions": "neverOpen",
-    "azureFunctions.mcpProjectType": "SelfHostedMcpServer"
+    "azureFunctions.mcpProjectType": "SelfHostedMcpServer",
+    "appService.defaultWebAppToDeploy": "None"
 }
