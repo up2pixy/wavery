@@ -3,8 +3,8 @@
   "configurationProfile": "mcp-custom-handler",
   "customHandler": {
     "description": {
-      "defaultExecutablePath": "node",
-      "arguments": ["dist/server.js"]
+      "defaultExecutablePath": "npm",
+      "arguments": ["run", "start"] 
     },
     "http": {
       "DefaultAuthorizationLevel": "anonymous"

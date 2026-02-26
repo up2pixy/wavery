@@ -5,7 +5,7 @@
   "scripts": {
     "build": "tsc",
     "start:stdio": "node dist/local.js",
-    "start:http": "node dist/server.js"
+    "start": "node dist/server.js"
   },
   "keywords": [
     "mcp",
@@ -17,8 +17,8 @@
   "author": "Michael Chen",
   "license": "MIT",
   "dependencies": {
-    "@modelcontextprotocol/sdk": "^1.12.1",
-    "sharp": "^0.33.2",
+    "@modelcontextprotocol/sdk": "^1.27.1",
+    "sharp": "^0.34.5",
     "wavery": "file:../lib",
     "zod": "^3.24.2"
   },
