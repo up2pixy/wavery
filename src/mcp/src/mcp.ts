@@ -24,12 +24,16 @@ const buildWaveryOptions = (params: {
   layerCount?: number;
   segmentCount?: number;
   variance?: number;
+  strokeWidth?: number;
+  strokeColor?: string;
 }): WaveryOptions => {
   const width = Math.min(params.width ?? defaultOptions.width, MAX_WIDTH);
   const height = Math.min(params.height ?? defaultOptions.height, MAX_HEIGHT);
   const layerCount = params.layerCount ?? defaultOptions.layerCount;
   const segmentCount = params.segmentCount ?? defaultOptions.segmentCount;
   const variance = params.variance ?? defaultOptions.variance;
+  const strokeWidth = params.strokeWidth ?? defaultOptions.strokeWidth;
+  const strokeColor = params.strokeColor ?? defaultOptions.strokeColor;
 
   let gradientColors: WaveryColorInfo[];
   if (params.colors && params.colors.length > 0) {
@@ -47,8 +51,8 @@ const buildWaveryOptions = (params: {
     segmentCount,
     layerCount,
     variance,
-    strokeWidth: 0,
-    strokeColor: "none",
+    strokeWidth,
+    strokeColor,
     gradientColors,
   };
 }
@@ -92,6 +96,16 @@ const sharedParams = {
     .max(1)
     .optional()
     .describe("How much each point can deviate from its grid position, 0–1 (default: 0.75)"),
+  strokeWidth: z
+    .number()
+    .min(0)
+    .max(20)
+    .optional()
+    .describe("Width of the stroke/border lines around each wave layer in pixels (default: 0, no stroke)"),
+  strokeColor: z
+    .string()
+    .optional()
+    .describe("CSS color for the stroke/border lines (default: #000000)"),
 };
 
 export const getMcpServer = () => {

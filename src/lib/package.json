@@ -1,6 +1,6 @@
 {
   "name": "wavery",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "Generate smooth wavy SVG backgrounds",
   "main": "lib/wavery.js",
   "types": "lib/wavery.d.ts",
