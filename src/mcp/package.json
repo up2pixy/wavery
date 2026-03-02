@@ -1,6 +1,6 @@
 {
   "name": "wavery-mcp",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "description": "MCP server for generating wavy SVG/PNG backgrounds using Wavery",
   "bin": {
     "wavery-mcp": "cli.js"
@@ -27,7 +27,8 @@
   "license": "MIT",
   "os": [
     "win32",
-    "linux"
+    "linux",
+    "darwin"
   ],
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.27.1",
@@ -36,6 +37,7 @@
     "zod": "^3.24.2"
   },
   "devDependencies": {
+    "@types/express": "^5.0.6",
     "@types/node": "^22.13.4",
     "typescript": "^5.3.3"
   }
